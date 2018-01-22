@@ -13,13 +13,13 @@ Better documentation is coming soon...
 - withSSM
 
 ### API
-- withAwsRegion
-- withFunctionVersion
+- [withAwsRegion](#withawsregion)
+- [withFunctionVersion](#withfunctionversion)
 - withHttpResponseHeader
 - withJoiValidation
-- withRequestId
+- [withRequestId](#withrequestid)
 - [withResponseTime](#withresponsetime)
-- withWarmupHeader
+- [withWarmupHeader](#withwarmupheader)
 
 ### Kinesis
 - withKinesisRecordFilter
