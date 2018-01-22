@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "AWS_REGION=jest_region jest --watchAll",
+    "test": "AWS_REGION=jest_region jest",
+    "test-watch": "yarn test --watchAll",
     "test-integration": "AWS_REGION=us-west-2 jest --watchAll --testRegex \"(/__integration__/.*|(\\.|/)(test|spec))\\.jsx?$\"",
     "coverage": "AWS_REGION=jest_region jest --coverage"
   },
