@@ -1,0 +1,32 @@
+{
+  "name": "remiddy",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "AWS_REGION=jest_region jest --watchAll",
+    "test-integration": "AWS_REGION=us-west-2 jest --watchAll --testRegex \"(/__integration__/.*|(\\.|/)(test|spec))\\.jsx?$\"",
+    "coverage": "AWS_REGION=jest_region jest --coverage"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.1.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "jest": "^22.1.4",
+    "regenerator-runtime": "^0.11.1"
+  },
+  "peerDependencies": {
+    "aws-sdk": "^2.185.0",
+    "http-errors": "^1.6.2",
+    "joi": "12.0.0",
+    "middy": "^0.7.4"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.185.0",
+    "http-errors": "^1.6.2",
+    "joi": "12.0.0",
+    "lodash": "^4.17.4",
+    "middy": "^0.7.4"
+  }
+}
