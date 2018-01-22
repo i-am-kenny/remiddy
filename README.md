@@ -14,6 +14,7 @@ Better documentation is coming soon...
 
 ### API
 - [withAwsRegion](#withawsregion)
+- [withDefaultHttpEvent](#withdefaulthttpevent)
 - [withFunctionVersion](#withfunctionversion)
 - [withHttpResponseHeader](#withhttpresponseheader)
 - [withJoiValidation](#withjoivalidation)
@@ -40,6 +41,12 @@ Adds the `context.invokedFunctionArn` to the response headers as `x-aws-region`.
 ```javascript
 middy(...).use(withAwsRegion());
 middy(...).use(withAwsRegion('x-aws-region')); // optionally rename the header
+```
+
+### withDefaultHttpEvent
+Defaults `queryStringParameters` and `pathParameters` to `{}` if `undefined` or `null`;
+```javascript
+middy(...).use(withDefaultHttpEvent());
 ```
 
 ### withFunctionVersion
