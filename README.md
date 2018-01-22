@@ -1,6 +1,7 @@
 # remiddy
 [![Build Status](https://travis-ci.org/i-am-kenny/remiddy.svg?branch=master)](https://travis-ci.org/i-am-kenny/remiddy)
 [![codecov](https://codecov.io/gh/i-am-kenny/remiddy/branch/master/graph/badge.svg)](https://codecov.io/gh/i-am-kenny/remiddy)
+[![Known Vulnerabilities](https://snyk.io/test/github/i-am-kenny/remiddy/badge.svg?targetFile=package.json)](https://snyk.io/test/github/i-am-kenny/remiddy?targetFile=package.json)
 
 Middleware for [Remiddy](https://github.com/middyjs/middy). Inspired by the example middleware and projects like [Recompose](https://github.com/acdlite/recompose).
 
