@@ -1,9 +1,9 @@
-import Joi from 'joi';
+import * as Joi from 'joi';
 import { isHttp } from '../lib/event-types';
-import createError from 'http-errors';
 
 const defaultJoiOptions = {
-  convert: true
+  convert: true,
+  abortEarly: false
 };
 
 const validate = (content, schema, options) => {

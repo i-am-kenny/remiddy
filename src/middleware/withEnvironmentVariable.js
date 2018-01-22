@@ -1,4 +1,4 @@
-import { pick } from 'lodash/fp';
+import pick from 'lodash/fp/pick';
 
 export default function(variables) {
   return {

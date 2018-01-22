@@ -1,4 +1,4 @@
-import { isArray } from 'lodash/fp';
+import isArray from 'lodash/fp/isArray';
 import withKinesisRecordFilter from './withKinesisRecordFilter';
 
 export default function(eventNames) {

@@ -1,4 +1,4 @@
-import { get } from 'lodash/fp';
+import get from 'lodash/fp/get';
 
 const getEventSource = get('Records[0].eventSource');
 

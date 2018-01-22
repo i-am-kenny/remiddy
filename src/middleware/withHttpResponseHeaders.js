@@ -1,4 +1,4 @@
-import { isFunction } from 'lodash/fp';
+import isFunction from 'lodash/fp/isFunction';
 import { isHttp } from '../lib/event-types';
 
 const withAwsRegion = (headers) => {

@@ -1,4 +1,5 @@
-import { isArray, isNil } from 'lodash/fp';
+import isArray from 'lodash/fp/isArray';
+import isNil from 'lodash/fp/isNil';
 
 export default class Cache {
   constructor() {

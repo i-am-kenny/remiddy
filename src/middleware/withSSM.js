@@ -1,4 +1,5 @@
-import { difference, isArray } from 'lodash/fp';
+import difference from 'lodash/fp/difference';
+import isArray from 'lodash/fp/isArray';
 import AWS from 'aws-sdk';
 import Cache from '../lib/cache';
 

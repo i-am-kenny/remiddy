@@ -1,5 +1,5 @@
 import AWS from 'aws-sdk';
-import { isObject } from 'lodash/fp';
+import isObject from 'lodash/fp/isObject';
 import withKinesisRecordMap from './withKinesisRecordMap';
 
 const Converter = AWS.DynamoDB.Converter;
