@@ -57,8 +57,15 @@ middy(...).use(withRequestId('x-aws-request-id')); // optionally rename the head
 ```
 
 ### withResponseTime
-Allows `x-aws-warmup` to be passed via request headers to immediately end execution with a `204` status.
+Adds "response-time" (ms) to the response headers as `x-aws-response-time`. Does not include the coldstart time, and is likely not accurate.
 ```javascript
 middy(...).use(withResponseTime());
-middy(...).use(withResponseTime('x-aws-warmup')); // optionally rename the header
+middy(...).use(withResponseTime('x-aws-response-time')); // optionally rename the header
+```
+
+### withWarmupHeader
+Allows `x-aws-warmup` to be passed via request headers to immediately end execution with a `204` status.
+```javascript
+middy(...).use(withWarmupHeader());
+middy(...).use(withWarmupHeader('x-aws-warmup')); // optionally rename the header
 ```
