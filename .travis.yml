@@ -3,4 +3,5 @@ language: node_js
 cache: yarn
 
 script:
+  - npm install -g codecov 
   - yarn test && codecov
