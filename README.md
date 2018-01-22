@@ -16,7 +16,7 @@ Better documentation is coming soon...
 - [withAwsRegion](#withawsregion)
 - [withFunctionVersion](#withfunctionversion)
 - [withHttpResponseHeader](#withhttpresponseheader)
-- withJoiValidation
+- [withJoiValidation](#withjoivalidation)
 - [withRequestId](#withrequestid)
 - [withResponseTime](#withresponsetime)
 - [withWarmupHeader](#withwarmupheader)
@@ -59,6 +59,17 @@ middy(...).use(withResponseHeader({
 middy(...).use(withResponseHeader((handler) => ({
   'x-custom-header': handler.event.value
 })));
+```
+
+### withJoiValidation
+Allows validation (and conversion) of any `event` property; such as `event.body`, `pathParameters`, etc...
+```javascript
+middy(...).use(withJoiValidation({
+  queryStringParameters: {
+    name: Joi.string().required(),
+    year: Joi.number().required()
+  }
+});
 ```
 
 ### withRequestId
