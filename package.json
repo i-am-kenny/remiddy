@@ -9,6 +9,10 @@
     "test-integration": "AWS_REGION=us-west-2 jest --watchAll --testRegex \"(/__integration__/.*|(\\.|/)(test|spec))\\.jsx?$\"",
     "coverage": "AWS_REGION=jest_region jest --coverage"
   },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-jest": "^22.1.0",
