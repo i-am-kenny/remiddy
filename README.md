@@ -18,7 +18,7 @@ Better documentation is coming soon...
 - withHttpResponseHeader
 - withJoiValidation
 - withRequestId
-- withResponseTime
+- [withResponseTime](#withresponsetime)
 - withWarmupHeader
 
 ### Kinesis
