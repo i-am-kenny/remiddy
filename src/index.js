@@ -1,4 +1,5 @@
 export { default as withAwsRegion } from './middleware/withAwsRegion';
+export { default as withDefaultHttpEvent } from './middleware/withDefaultHttpEvent';
 export { default as withDynamoDbDeleteRecordFilter } from './middleware/withDynamoDbDeleteRecordFilter';
 export { default as withDynamoDbInsertRecordFilter } from './middleware/withDynamoDbInsertRecordFilter';
 export { default as withDynamoDbRecordFilter } from './middleware/withDynamoDbRecordFilter';

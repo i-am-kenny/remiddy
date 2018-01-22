@@ -6507,6 +6507,21 @@ function withAwsRegion$1(header = 'x-aws-region') {
   });
 }
 
+function withDefaultHttpEvent() {
+  return {
+    before: (handler, next) => {
+      const { event } = handler;
+
+      if(isHttp(event)) {
+        event.queryStringParameters = event.queryStringParameters || {};
+        event.pathParameters = event.pathParameters || {};
+      }
+
+      next();
+    }
+  }
+}
+
 var func$2 = convert_1('isArray', isArray_1, _falseOptions);
 
 func$2.placeholder = placeholder;
@@ -7326,6 +7341,7 @@ function withWarmupHttpHeader(header = 'x-aws-warmup') {
 }
 
 exports.withAwsRegion = withAwsRegion$1;
+exports.withDefaultHttpEvent = withDefaultHttpEvent;
 exports.withDynamoDbDeleteRecordFilter = withDynamoDbDeleteRecordFilter;
 exports.withDynamoDbInsertRecordFilter = withDynamoDbInsertRecordFilter;
 exports.withDynamoDbRecordFilter = withDynamoDbRecordFilter;
