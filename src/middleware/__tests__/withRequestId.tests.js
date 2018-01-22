@@ -20,15 +20,15 @@ describe('withRequestId', () => {
     const handler = createHandler().use(withRequestId());
 
     handler(httpEvent, context, (_, res) => {
-      expect(res).toHaveProperty('headers.x-request-id', context.awsRequestId);
+      expect(res).toHaveProperty('headers.x-aws-request-id', context.awsRequestId);
     });
   });
 
   it('should use header name argument', () => {
-    const handler = createHandler().use(withRequestId('x-request-id-2'));
+    const handler = createHandler().use(withRequestId('x-aws-request-id-2'));
 
     handler(httpEvent, context, (_, res) => {
-      expect(res).toHaveProperty('headers.x-request-id-2', context.awsRequestId);
+      expect(res).toHaveProperty('headers.x-aws-request-id-2', context.awsRequestId);
     });
   })
 });

@@ -98,7 +98,7 @@ function withEnvironmentVariable(variables) {
   }
 }
 
-function withFunctionVersion(header = 'x-function-version') {
+function withFunctionVersion(header = 'x-aws-function-version') {
   return withAwsRegion((handler) => ({
     [header]: handler.context.functionVersion
   }))
@@ -168,20 +168,20 @@ function withKinesisStreamRecordCount() {
   })
 }
 
-function withRequestId(header = 'x-request-id') {
+function withRequestId(header = 'x-aws-request-id') {
   return withAwsRegion((handler) => ({
     [header]: handler.context.awsRequestId
   }))
 }
 
-function withResponseTime(header = 'x-response-time') {
+function withResponseTime(header = 'x-aws-response-time') {
   const withHeader = withAwsRegion((handler) => ({
     [header]: (handler.context._responseTime - Date.now()).toString()
   }));
 
   return ({
     before: (handler, next) => {
-      handler.context._responseTime = { start: Date.now() };
+      handler.context._responseTime = Date.now();
 
       next();
     },

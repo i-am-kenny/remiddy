@@ -20,15 +20,15 @@ describe('withFunctionVersion', () => {
     const handler = createHandler().use(withFunctionVersion());
 
     handler(httpEvent, context, (_, res) => {
-      expect(res).toHaveProperty('headers.x-function-version', context.functionVersion);
+      expect(res).toHaveProperty('headers.x-aws-function-version', context.functionVersion);
     });
   });
 
   it('should use header name argument', () => {
-    const handler = createHandler().use(withFunctionVersion('x-function-version-2'));
+    const handler = createHandler().use(withFunctionVersion('x-aws-function-version-2'));
 
     handler(httpEvent, context, (_, res) => {
-      expect(res).toHaveProperty('headers.x-function-version-2', context.functionVersion);
+      expect(res).toHaveProperty('headers.x-aws-function-version-2', context.functionVersion);
     });
   })
 });
