@@ -13,13 +13,13 @@ Better documentation is coming soon...
 - withSSM
 
 ### API
-- withAwsRegion
-- withFunctionVersion
-- withHttpResponseHeader
-- withJoiValidation
-- withRequestId
-- withResponseTime
-- withWarmupHeader
+- [withAwsRegion](#withawsregion)
+- [withFunctionVersion](#withfunctionversion)
+- [withHttpResponseHeader](#withhttpresponseheader)
+- [withJoiValidation](#withjoivalidation)
+- [withRequestId](#withrequestid)
+- [withResponseTime](#withresponsetime)
+- [withWarmupHeader](#withwarmupheader)
 
 ### Kinesis
 - withKinesisRecordFilter
@@ -49,6 +49,29 @@ middy(...).use(withFunctionVersion());
 middy(...).use(withFunctionVersion('x-aws-function-version')); // optionally rename the header
 ```
 
+### withHttpResponseHeader
+Adds custom HTTP repsonse headers.
+```javascript
+middy(...).use(withResponseHeader({
+  'Access-Control-Allow-Origin': '*'
+}));
+
+middy(...).use(withResponseHeader((handler) => ({
+  'x-custom-header': handler.event.value
+})));
+```
+
+### withJoiValidation
+Allows validation (and conversion) of any `event` property; such as `event.body`, `pathParameters`, etc...
+```javascript
+middy(...).use(withJoiValidation({
+  queryStringParameters: {
+    name: Joi.string().required(),
+    year: Joi.number().required()
+  }
+});
+```
+
 ### withRequestId
 Adds the `context.awsRequestId` to the response headers as `x-aws-request-id`.
 ```javascript
@@ -57,8 +80,15 @@ middy(...).use(withRequestId('x-aws-request-id')); // optionally rename the head
 ```
 
 ### withResponseTime
-Allows `x-aws-warmup` to be passed via request headers to immediately end execution with a `204` status.
+Adds "response-time" (ms) to the response headers as `x-aws-response-time`. Does not include the coldstart time, and is likely not accurate.
 ```javascript
 middy(...).use(withResponseTime());
-middy(...).use(withResponseTime('x-aws-warmup')); // optionally rename the header
+middy(...).use(withResponseTime('x-aws-response-time')); // optionally rename the header
+```
+
+### withWarmupHeader
+Allows `x-aws-warmup` to be passed via request headers to immediately end execution with a `204` status.
+```javascript
+middy(...).use(withWarmupHeader());
+middy(...).use(withWarmupHeader('x-aws-warmup')); // optionally rename the header
 ```
