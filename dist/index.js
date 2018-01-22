@@ -176,7 +176,7 @@ function withRequestId(header = 'x-aws-request-id') {
 
 function withResponseTime(header = 'x-aws-response-time') {
   const withHeader = withAwsRegion((handler) => ({
-    [header]: (handler.context._responseTime - Date.now()).toString()
+    [header]: (Date.now() - handler.context._responseTime).toString()
   }));
 
   return ({

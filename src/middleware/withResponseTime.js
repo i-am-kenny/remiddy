@@ -3,7 +3,7 @@ import withHttpResponseHeaders from './withHttpResponseHeaders';
 
 export default function(header = 'x-aws-response-time') {
   const withHeader = withHttpResponseHeaders((handler) => ({
-    [header]: (handler.context._responseTime - Date.now()).toString()
+    [header]: (Date.now() - handler.context._responseTime).toString()
   }));
 
   return ({
