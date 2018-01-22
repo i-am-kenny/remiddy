@@ -15,7 +15,7 @@ Better documentation is coming soon...
 ### API
 - [withAwsRegion](#withawsregion)
 - [withFunctionVersion](#withfunctionversion)
-- withHttpResponseHeader
+- [withHttpResponseHeader](#withhttpresponseheader)
 - withJoiValidation
 - [withRequestId](#withrequestid)
 - [withResponseTime](#withresponsetime)
@@ -47,6 +47,18 @@ Adds the Lambda function version to the response headers as `x-aws-function-vers
 ```javascript
 middy(...).use(withFunctionVersion());
 middy(...).use(withFunctionVersion('x-aws-function-version')); // optionally rename the header
+```
+
+### withHttpResponseHeader
+Adds custom HTTP repsonse headers.
+```javascript
+middy(...).use(withResponseHeader({
+  'Access-Control-Allow-Origin': '*'
+}));
+
+middy(...).use(withResponseHeader((handler) => ({
+  'x-custom-header': handler.event.value
+})));
 ```
 
 ### withRequestId
