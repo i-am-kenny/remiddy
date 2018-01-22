@@ -8,10 +8,7 @@ const withAwsRegion = (headers) => {
 
       const newHeaders = isFunction(headers) ? headers(handler) : headers;
 
-      handler.response.headers = {
-        ...newHeaders,
-        ...handler.response.headers
-      };
+      handler.response.headers = Object.assign({}, newHeaders, handler.response.headers);
     }
 
     next();

@@ -9,10 +9,7 @@ export default function(variables) {
         ? pick(variables, process.env) 
         : process.env;
 
-      context.env = {
-        ...context.env,
-        ...env
-      };
+      context.env = Object.assign({}, context.env, env);
       
       next();
     }
