@@ -33,3 +33,32 @@ Better documentation is coming soon...
 - withDynamoDbUpdateRecordFilter
 - withDynamodbUpsertRecordFilter
 - withUnmarshalledDynamoDbRecords
+
+## Examples
+### withAwsRegion
+Adds the `context.invokedFunctionArn` to the response headers as `x-aws-region`.
+```javascript
+middy(...).use(withAwsRegion());
+middy(...).use(withAwsRegion('x-aws-region')); // optionally rename the header
+```
+
+### withFunctionVersion
+Adds the Lambda function version to the response headers as `x-aws-function-version`.
+```javascript
+middy(...).use(withFunctionVersion());
+middy(...).use(withFunctionVersion('x-aws-function-version')); // optionally rename the header
+```
+
+### withRequestId
+Adds the `context.awsRequestId` to the response headers as `x-aws-request-id`.
+```javascript
+middy(...).use(withRequestId());
+middy(...).use(withRequestId('x-aws-request-id')); // optionally rename the header
+```
+
+### withResponseTime
+Allows `x-aws-warmup` to be passed via request headers to immediately end execution with a `204` status.
+```javascript
+middy(...).use(withResponseTime());
+middy(...).use(withResponseTime('x-aws-warmup')); // optionally rename the header
+```
