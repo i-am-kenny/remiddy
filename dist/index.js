@@ -38,11 +38,13 @@ const withAwsRegion = (headers) => {
   };
 };
 
-const region = process.env.AWS_REGION;
-
 function withAwsRegion$1(header = 'x-aws-region') {
-  return withAwsRegion({
-    [header]: region
+  return withAwsRegion((handler) => {
+    const region = handler.context.invokedFunctionArn.split(':')[3];
+
+    return {
+      [header]: region
+    }
   });
 }
 
