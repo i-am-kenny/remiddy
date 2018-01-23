@@ -1,7 +1,7 @@
 import isFunction from 'lodash/fp/isFunction';
 import { isHttp } from '../lib/event-types';
 
-const withAwsRegion = (headers) => {
+export default function(headers) {
   const addHeaders = (handler, next) => {
     if(isHttp(handler.event)) {
       handler.response = handler.response || {};
@@ -18,6 +18,4 @@ const withAwsRegion = (headers) => {
     after: addHeaders,
     onError: addHeaders
   };
-};
-
-export default withAwsRegion
+}

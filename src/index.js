@@ -3,8 +3,10 @@ export { default as withDefaultHttpEvent } from './middleware/withDefaultHttpEve
 export { default as withDynamoDbDeleteRecordFilter } from './middleware/withDynamoDbDeleteRecordFilter';
 export { default as withDynamoDbInsertRecordFilter } from './middleware/withDynamoDbInsertRecordFilter';
 export { default as withDynamoDbRecordFilter } from './middleware/withDynamoDbRecordFilter';
+export { default as withDynamoDbTableName } from './middleware/withDynamoDbTableName'
 export { default as withDynamoDbUpdateRecordFilter } from './middleware/withDynamoDbUpdateRecordFilter';
 export { default as withDynamoDbUpsertRecordFilter } from './middleware/withDynamoDbUpsertRecordFilter';
+export { default as withEmptyStream } from './middleware/withEmptyStream';
 export { default as withEnvironmentVariable } from './middleware/withEnvironmentVariable';
 export { default as withFunctionVersion } from './middleware/withFunctionVersion';
 export { default as withHttpResponseHeaders } from './middleware/withHttpResponseHeaders';

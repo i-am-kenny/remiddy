@@ -6478,7 +6478,7 @@ var func$1 = convert_1('isFunction', isFunction_1, _falseOptions);
 func$1.placeholder = placeholder;
 var isFunction$1 = func$1;
 
-const withAwsRegion = (headers) => {
+function withHttpResponseHeaders(headers) {
   const addHeaders = (handler, next) => {
     if(isHttp(handler.event)) {
       handler.response = handler.response || {};
@@ -6495,10 +6495,10 @@ const withAwsRegion = (headers) => {
     after: addHeaders,
     onError: addHeaders
   };
-};
+}
 
-function withAwsRegion$1(header = 'x-aws-region') {
-  return withAwsRegion((handler) => {
+function withAwsRegion(header = 'x-aws-region') {
+  return withHttpResponseHeaders((handler) => {
     const region = handler.context.invokedFunctionArn.split(':')[3];
 
     return {
@@ -6555,12 +6555,54 @@ function withDynamoDbInsertRecordFilter() {
   return withDynamoDbRecordFilter('INSERT');
 }
 
+function withKinesisRecordMap(mapper) {
+  return ({
+    before: (handler, next) => {
+      const { event } = handler;
+      
+      if(event.Records) {
+        event.Records = event.Records.map(mapper);
+      }
+
+      next();
+    }
+  })
+}
+
+const getTableNameFromStreamArn = (arn) => arn.split('/')[1];
+
+function withDynamoDbTableName(prop = 'tableName') {
+  return withKinesisRecordMap(record => Object.assign(
+    {},
+    record,
+    { 
+      [prop]: getTableNameFromStreamArn(record.eventSourceARN)
+    }
+  ));
+}
+
 function withDynamoDbUpdateRecordFilter() {
   return withDynamoDbRecordFilter('MODIFY');
 }
 
 function withDynamoDbUpsertRecordFilter() {
   return withDynamoDbRecordFilter(['INSERT', 'MODIFY']);
+}
+
+function withEmptyStream() {
+  return {
+    before: (handler, next) => {
+      const { event } = handler;
+
+      if(event.Records && event.Records.length === 0) {
+        console.log('No records to process');
+
+        return handler.callback();
+      }
+
+      return next();
+    }
+  }
 }
 
 var global$1 = typeof global !== "undefined" ? global :
@@ -6921,7 +6963,7 @@ function withEnvironmentVariable(variables) {
 }
 
 function withFunctionVersion(header = 'x-aws-function-version') {
-  return withAwsRegion((handler) => ({
+  return withHttpResponseHeaders((handler) => ({
     [header]: handler.context.functionVersion
   }))
 }
@@ -6963,20 +7005,6 @@ function withJoiValidation(config, joiOptions) {
   };
 }
 
-function withKinesisRecordMap(mapper) {
-  return ({
-    before: (handler, next) => {
-      const { event } = handler;
-      
-      if(event.Records) {
-        event.Records = event.Records.map(mapper);
-      }
-
-      next();
-    }
-  })
-}
-
 function withKinesisStreamRecordCount() {
   return ({
     before: (handler, next) => {
@@ -6992,13 +7020,13 @@ function withKinesisStreamRecordCount() {
 }
 
 function withRequestId(header = 'x-aws-request-id') {
-  return withAwsRegion((handler) => ({
+  return withHttpResponseHeaders((handler) => ({
     [header]: handler.context.awsRequestId
   }))
 }
 
 function withResponseTime(header = 'x-aws-response-time') {
-  const withHeader = withAwsRegion((handler) => ({
+  const withHeader = withHttpResponseHeaders((handler) => ({
     [header]: (Date.now() - handler.context._responseTime).toString()
   }));
 
@@ -7340,16 +7368,18 @@ function withWarmupHttpHeader(header = 'x-aws-warmup') {
   }
 }
 
-exports.withAwsRegion = withAwsRegion$1;
+exports.withAwsRegion = withAwsRegion;
 exports.withDefaultHttpEvent = withDefaultHttpEvent;
 exports.withDynamoDbDeleteRecordFilter = withDynamoDbDeleteRecordFilter;
 exports.withDynamoDbInsertRecordFilter = withDynamoDbInsertRecordFilter;
 exports.withDynamoDbRecordFilter = withDynamoDbRecordFilter;
+exports.withDynamoDbTableName = withDynamoDbTableName;
 exports.withDynamoDbUpdateRecordFilter = withDynamoDbUpdateRecordFilter;
 exports.withDynamoDbUpsertRecordFilter = withDynamoDbUpsertRecordFilter;
+exports.withEmptyStream = withEmptyStream;
 exports.withEnvironmentVariable = withEnvironmentVariable;
 exports.withFunctionVersion = withFunctionVersion;
-exports.withHttpResponseHeaders = withAwsRegion;
+exports.withHttpResponseHeaders = withHttpResponseHeaders;
 exports.withJoiValidation = withJoiValidation;
 exports.withKinesisRecordFilter = withKinesisRecordFilter;
 exports.withKinesisRecordMap = withKinesisRecordMap;
