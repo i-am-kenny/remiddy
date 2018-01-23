@@ -33,7 +33,7 @@ Better documentation is coming soon...
 - withDynamoDbRecordFilter
 - withDynamoDbUpdateRecordFilter
 - withDynamodbUpsertRecordFilter
-- withUnmarshalledDynamoDbRecords
+- [withUnmarshalledDynamoDbRecords](#withunmarshalleddynamodbrecords)
 
 ## Examples
 ### withAwsRegion
@@ -98,4 +98,10 @@ Allows `x-aws-warmup` to be passed via request headers to immediately end execut
 ```javascript
 middy(...).use(withWarmupHeader());
 middy(...).use(withWarmupHeader('x-aws-warmup')); // optionally rename the header
+```
+
+### withUnmarshalledDynamoDbRecords
+Unmarshals `dynamodb.NewImage` and `dynamodb.OldImage`.
+```javascript
+middy(...).use(withUnmarshalledDynamoDbRecords());
 ```
