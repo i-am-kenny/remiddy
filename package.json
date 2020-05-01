@@ -5,11 +5,12 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup -c",
-    "prepublish": "yarn test && yarn build",
+    "prepublish": "yarn run snyk-protect && yarn test && yarn build",
     "test": "AWS_REGION=jest_region jest",
     "test-watch": "yarn test --watchAll",
     "test-integration": "AWS_REGION=us-west-2 jest --watchAll --testRegex \"(/__integration__/.*|(\\.|/)(test|spec))\\.jsx?$\"",
-    "coverage": "AWS_REGION=jest_region jest --coverage"
+    "coverage": "AWS_REGION=jest_region jest --coverage",
+    "snyk-protect": "snyk protect"
   },
   "jest": {
     "coverageDirectory": "./coverage/",
@@ -40,6 +41,8 @@
   },
   "dependencies": {
     "lodash": "^4.17.4",
-    "middy": "^0.7.4"
-  }
+    "middy": "^0.7.4",
+    "snyk": "^1.316.1"
+  },
+  "snyk": true
 }
