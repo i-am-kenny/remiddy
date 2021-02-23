@@ -39,7 +39,7 @@
     "middy": "^0.7.4"
   },
   "dependencies": {
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.21",
     "middy": "^0.7.4"
   }
 }
